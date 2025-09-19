@@ -1,0 +1,131 @@
+.navigationItem {
+  /* Base styles handled by MUI */
+}
+
+.listItemButton {
+  border-radius: var(--radius-md);
+  margin: 0 var(--spacing-sm) var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.listItemButton:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.listItemButtonActive {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.listItemButtonActive:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.listItemIcon {
+  min-width: 40px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listItemText {
+  flex-grow: 1;
+}
+
+.listItemTextPrimary {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: inherit;
+}
+
+.listItemTextPrimaryActive {
+  font-weight: var(--font-weight-semibold);
+}
+
+.expandIcon {
+  font-size: var(--font-size-md);
+  transition: transform 0.2s ease;
+  color: var(--color-text-secondary);
+}
+
+.expandIconOpen {
+  transform: rotate(180deg);
+}
+
+.collapse {
+  transition: all 0.3s ease-in-out;
+}
+
+.subItemList {
+  padding: 0;
+}
+
+.subItemButton {
+  border-radius: var(--radius-sm);
+  margin: 0 var(--spacing-sm) var(--spacing-xs) var(--spacing-xl);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.subItemButton:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.subItemButtonActive {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.subItemButtonActive:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.subItemIcon {
+  min-width: 32px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subItemText {
+  flex-grow: 1;
+}
+
+.subItemTextPrimary {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: inherit;
+}
+
+.subItemTextPrimaryActive {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+  .listItemButton {
+    margin: 0 var(--spacing-xs);
+    padding: var(--spacing-sm);
+  }
+  
+  .subItemButton {
+    margin: 0 var(--spacing-xs) var(--spacing-xs) var(--spacing-lg);
+    padding: var(--spacing-xs);
+  }
+}
