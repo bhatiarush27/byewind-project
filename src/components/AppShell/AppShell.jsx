@@ -1,40 +1,32 @@
 import { useState } from "react";
 import {
   Box,
-  Drawer,
   AppBar,
   Toolbar,
-  List,
-  Divider,
-  Typography,
   useMediaQuery,
   CssBaseline,
   Badge,
+  Drawer,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar,
+  Divider,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
   Notifications as NotificationsIcon,
   AccountCircle as AccountCircleIcon,
-  PieChartOutlined as PieChartIconOutlined,
-  ShoppingCartOutlined as ShoppingCartIconOutlined,
-  FolderOutlined as FolderIconOutlined,
-  // ImportContactsIcon as ImportContactsIconOutlined,
-  // BookOpenIcon,
-  // BookOpen as BookOpenIcon,
+  ViewSidebar as PanelRightIcon,
+  History as HistoryIcon,
+  Contacts as ContactsIcon,
 } from "@mui/icons-material";
-// import ImportContactsIcon from '@mui/icons-material/ImportContacts';
-import { useNavigate, useLocation } from "react-router-dom";
-import {
-  ECOMMERCE_ITEMS,
-  PROJECTS_ITEMS,
-  COURSES_ITEMS,
-} from "../../constants/navigation";
-import ProfileSection from "../NavigationItem/ProfileSection";
-import QuickAccessSection from "../NavigationItem/QuickAccessSection";
 import { ThemeToggle } from "../lib";
 import styles from "./AppShell.module.css";
-import { SideMenuGroup } from "../lib/SideMenuLinkGroup/SideMenuLinkGroup";
-import { SideMenuSubLink } from "../lib/SideMenuSubLink/SideMenuSubLink";
+import SidePanel from "../SidePanel/SidePanel";
+import { RIGHT_PANEL_DATA } from "../../constants/rightPanelData.jsx";
+import { LEFT_PANEL_DATA } from "../../constants/leftPanelData.jsx";
 import PropTypes from "prop-types";
 
 const AppShell = ({ children }) => {
@@ -42,118 +34,20 @@ const AppShell = ({ children }) => {
   const isTablet = useMediaQuery("(max-width: 900px)");
   const isDesktop = !isMobile && !isTablet;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [rightPanelOpen, setRightPanelOpen] = useState(true);
 
-  const navigate = useNavigate();
-
-  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const routeToPathnameMap = {
-    "ecommerce.products": "/ecommerce/products",
-    "ecommerce.orders": "/ecommerce/orders",
-    "ecommerce.customers": "/ecommerce/customers",
-    "projects.alpha": "/projects/alpha",
-    "projects.beta": "/projects/beta",
-    "projects.gamma": "/projects/gamma",
-    "projects.delta": "/projects/delta",
-    "courses.web-dev": "/courses/web-dev",
-    "courses.data-science": "/courses/data-science",
-    "courses.design": "/courses/design",
-    dashboard: "/default",
+  const handleRightPanelToggle = () => {
+    setRightPanelOpen(!rightPanelOpen);
   };
 
-  const pathnameToSelectedKeyMap = {
-    "/ecommerce/products": "ecommerce.products",
-    "/ecommerce/orders": "ecommerce.orders",
-    "/ecommerce/customers": "ecommerce.customers",
-    "/projects/alpha": "projects.alpha",
-    "/projects/beta": "projects.beta",
-    "/projects/gamma": "projects.gamma",
-    "/projects/delta": "projects.delta",
-    "/courses/web-dev": "courses.web-dev",
-    "/courses/data-science": "courses.data-science",
-    "/courses/design": "courses.design",
-    "/default": "dashboard",
-  };
 
-  const getSelectedKeyFromPathname = (pathname) => {
-    return pathnameToSelectedKeyMap[pathname];
-  };
 
-  const selectedKey = getSelectedKeyFromPathname(location.pathname);
-
-  console.log(selectedKey, "selectedKey");
-
-  const handleSubLinkSelect = (key) => {
-    navigate(routeToPathnameMap[key]);
-  };
-
-  const drawer = (
-    <Box className={styles.drawerContent}>
-      <ProfileSection />
-      <Box className={styles.drawerNavigation}>
-        <QuickAccessSection />
-
-        <List sx={{ px: 1 }}>
-          <Box>
-            <Typography
-              variant="h5"
-              sx={{
-                fontSize: "12px",
-                fontWeight: "var(--font-weight-semibold)",
-                color: "var(--color-text-secondary)",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-                lineHeight: "1.5",
-                px: 1,
-                py: 2,
-              }}
-            >
-              Dashboards
-            </Typography>
-            <SideMenuSubLink
-              pageNameKey="dashboard"
-              pageNameLabel="Default"
-              selectedValue={selectedKey}
-              onSubLinkSelect={handleSubLinkSelect}
-              to="/default"
-              iconRight={<PieChartIconOutlined fontSize="small" />}
-            />
-            <SideMenuGroup
-              sideMenuLinkKey="ecommerce"
-              expanded={true}
-              customTitle="Ecommerce"
-              onSubLinkSelect={handleSubLinkSelect}
-              subLinkOptions={ECOMMERCE_ITEMS}
-              iconRight={<ShoppingCartIconOutlined fontSize="small" />}
-              selectedValue={selectedKey}
-            />
-            <SideMenuGroup
-              sideMenuLinkKey="projects"
-              expanded={true}
-              customTitle="Projects"
-              onSubLinkSelect={handleSubLinkSelect}
-              subLinkOptions={PROJECTS_ITEMS}
-              iconRight={<FolderIconOutlined fontSize="small" />}
-              selectedValue={selectedKey}
-            />
-            <SideMenuGroup
-              sideMenuLinkKey="courses"
-              expanded={true}
-              customTitle="Courses"
-              onSubLinkSelect={handleSubLinkSelect}
-              subLinkOptions={COURSES_ITEMS}
-              // iconRight={<ImportContactsIcon fontSize="small" />}
-              selectedValue={selectedKey}
-            />
-          </Box>
-        </List>
-      </Box>
-    </Box>
-  );
+  // Left panel is now handled by SidePanel component
 
   return (
     <Box className={styles.appShell}>
@@ -165,6 +59,16 @@ const AppShell = ({ children }) => {
         className={`${styles.appBar} ${
           isMobile || isTablet ? styles.appBarMobile : ""
         }`}
+        sx={{
+          width: { xs: '100%', md: 'calc(100% - 280px)' },
+          marginLeft: { xs: 0, md: '280px' },
+          marginRight: { xs: 0, md: rightPanelOpen ? '320px' : 0 },
+          backgroundColor: '#ffffff',
+          color: '#212121',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
+          borderBottom: '1px solid #e0e0e0',
+          zIndex: 1200
+        }}
       >
         <Toolbar className={styles.toolbar}>
           <MenuIcon
@@ -172,13 +76,37 @@ const AppShell = ({ children }) => {
               isMobile || isTablet ? styles.menuButtonMobile : ""
             }`}
             onClick={handleDrawerToggle}
+            sx={{
+              display: { xs: 'block', md: 'none' }
+            }}
           />
-          <Typography className={styles.title}>Test </Typography>
+          <div 
+            style={{ 
+              color: '#212121', 
+              fontSize: '18px', 
+              fontWeight: 600,
+              flexGrow: 1,
+              display: 'block',
+              lineHeight: '64px'
+            }}
+          >
+            Test
+          </div>
           <Box className={styles.headerActions}>
             <ThemeToggle />
             <Badge badgeContent={4} color="error">
               <NotificationsIcon />
             </Badge>
+            <HistoryIcon />
+            <ContactsIcon />
+            <PanelRightIcon
+              onClick={handleRightPanelToggle}
+              sx={{
+                cursor: 'pointer',
+                color: rightPanelOpen ? '#2196f3' : '#666666',
+                transition: 'color 0.2s ease'
+              }}
+            />
             <AccountCircleIcon />
           </Box>
         </Toolbar>
@@ -189,46 +117,186 @@ const AppShell = ({ children }) => {
         className={styles.navigation}
         aria-label="navigation"
       >
-        {/* Mobile/Tablet Drawer - Temporary/Overlay */}
-        <Drawer
-          variant="temporary"
-          open={mobileOpen && (isMobile || isTablet)}
+        {/* Left Panel - Navigation */}
+        <SidePanel
+          isOpen={isDesktop || mobileOpen}
           onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          className={`${styles.drawer} ${styles.drawerMobile}`}
-          classes={{
-            paper: styles.drawerPaper,
+          position="left"
+          panelType="navigation"
+          navigationData={LEFT_PANEL_DATA}
+        />
+      </Box>
+
+      {/* Right Panel - Notifications (Full-height like left panel) */}
+      {rightPanelOpen && (
+        <Drawer
+          variant="permanent"
+          anchor="right"
+          sx={{
+            width: 320,
+            flexShrink: 0,
+            position: "fixed",
+            top: 0,
+            right: 0,
+            height: "100vh",
+            zIndex: 1100,
+            "& .MuiDrawer-paper": {
+              width: 320,
+              boxSizing: "border-box",
+              backgroundColor: "#ffffff",
+              borderLeft: "1px solid #e0e0e0",
+              position: "fixed",
+              top: 0,
+              right: 0,
+              height: "100vh",
+            },
           }}
         >
-          {drawer}
-        </Drawer>
+        <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+          {/* Header */}
+          <Box sx={{ padding: '16px 20px', borderBottom: '1px solid #e0e0e0', backgroundColor: '#fafafa' }}>
+            <Typography sx={{ fontSize: '16px', fontWeight: 600, color: '#333333', margin: 0 }}>
+              Notifications
+            </Typography>
+          </Box>
 
-        {/* Desktop Drawer - Permanent */}
-        {isDesktop && (
-          <Drawer
-            variant="permanent"
-            className={`${styles.drawer} ${styles.drawerDesktop}`}
-            classes={{
-              paper: styles.drawerPaper,
-            }}
-            open
-          >
-            {drawer}
-          </Drawer>
-        )}
-      </Box>
+          {/* Notifications Section */}
+          <Box sx={{ padding: '20px' }}>
+            <Typography sx={{ 
+              fontSize: '14px', 
+              fontWeight: 600, 
+              color: '#333333', 
+              marginBottom: '16px', 
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Notifications
+            </Typography>
+            <List>
+              {RIGHT_PANEL_DATA.notifications?.map((notification, index) => (
+                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
+                  <ListItemText
+                    primary={notification.message}
+                    secondary={notification.time}
+                    primaryTypographyProps={{ 
+                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
+                    }}
+                    secondaryTypographyProps={{ 
+                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+
+          <Divider sx={{ margin: '0 20px', backgroundColor: '#e0e0e0' }} />
+
+          {/* Activities Section */}
+          <Box sx={{ padding: '20px' }}>
+            <Typography sx={{ 
+              fontSize: '14px', 
+              fontWeight: 600, 
+              color: '#333333', 
+              marginBottom: '16px', 
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Activities
+            </Typography>
+            <List>
+              {RIGHT_PANEL_DATA.activities?.map((activity, index) => (
+                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
+                  <Avatar sx={{ 
+                    width: 32, 
+                    height: 32, 
+                    backgroundColor: '#e3f2fd', 
+                    color: '#1976d2', 
+                    fontSize: '12px', 
+                    fontWeight: 600, 
+                    marginRight: '12px' 
+                  }}>
+                    A
+                  </Avatar>
+                  <ListItemText
+                    primary={activity.message}
+                    secondary={activity.time}
+                    primaryTypographyProps={{ 
+                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
+                    }}
+                    secondaryTypographyProps={{ 
+                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+
+          <Divider sx={{ margin: '0 20px', backgroundColor: '#e0e0e0' }} />
+
+          {/* Contacts Section */}
+          <Box sx={{ padding: '20px' }}>
+            <Typography sx={{ 
+              fontSize: '14px', 
+              fontWeight: 600, 
+              color: '#333333', 
+              marginBottom: '16px', 
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Contacts
+            </Typography>
+            <List>
+              {RIGHT_PANEL_DATA.contacts?.map((contact, index) => (
+                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
+                  <Avatar sx={{ 
+                    width: 32, 
+                    height: 32, 
+                    backgroundColor: '#e3f2fd', 
+                    color: '#1976d2', 
+                    fontSize: '12px', 
+                    fontWeight: 600, 
+                    marginRight: '12px' 
+                  }}>
+                    {contact.avatar}
+                  </Avatar>
+                  <ListItemText
+                    primary={contact.name}
+                    secondary={contact.status}
+                    primaryTypographyProps={{ 
+                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
+                    }}
+                    secondaryTypographyProps={{ 
+                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Box>
+        </Drawer>
+      )}
 
       <Box
         component="main"
-        className={`${styles.main} ${isMobile ? styles.mainMobile : ""} ${
-          isTablet ? styles.mainTablet : ""
-        }`}
+        sx={{
+          flexGrow: 1,
+          // padding: { xs: '16px', sm: '24px', md: '32px' },
+          marginTop: '64px',
+          marginRight: { xs: 0, md: rightPanelOpen ? '320px' : 0 },
+          minHeight: 'calc(100vh - 64px)',
+          backgroundColor: '#ffffff',
+          transition: 'all 0.3s ease-in-out',
+          position: 'relative',
+          zIndex: 1,
+        }}
       >
         <Toolbar />
         {children}
       </Box>
+
     </Box>
   );
 };
