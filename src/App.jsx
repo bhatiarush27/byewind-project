@@ -16,7 +16,7 @@ const createMuiTheme = (isDarkMode) => createTheme({
       main: isDarkMode ? '#81c784' : '#4caf50',
     },
     background: {
-      default: isDarkMode ? '#0a0a0a' : '#f5f5f5',
+      default: isDarkMode ? '#0a0a0a' : '#ffffff',
       paper: isDarkMode ? '#1e1e1e' : '#ffffff',
     },
   },
@@ -43,7 +43,9 @@ const AppContent = () => {
       <BrowserRouter>
         <AppShell>
           <AppRoutes />
+          <h1>Hello</h1>
         </AppShell>
+        
       </BrowserRouter>
     </ThemeProvider>
   );

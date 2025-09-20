@@ -1,14 +1,15 @@
-import React from "react";
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Box } from "@mui/material";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { PROJECTIONS_DATA } from "../constants/dashboardData";
 
 const ProjectionsChart = () => {
   const options = {
     chart: {
       type: "column",
       backgroundColor: "transparent",
+      // height: "100%",
+      // maxHeight: "100%",
+      // spacing: [20, 20, 20, 20],
     },
     title: {
       text: "Projections vs Actuals",
@@ -71,9 +72,12 @@ const ProjectionsChart = () => {
     <Card
       sx={{
         height: "100%",
+        width: "100%",
         borderRadius: '12px',
         boxShadow: "0",
         backgroundColor: "var(--color-background-graph-light)",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardContent>

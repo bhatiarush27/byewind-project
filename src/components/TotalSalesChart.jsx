@@ -9,7 +9,6 @@ const TotalSalesChart = () => {
     chart: {
       type: 'pie',
       backgroundColor: 'transparent',
-      height: 300
     },
     title: {
       text: 'Total Sales',
@@ -49,14 +48,28 @@ const TotalSalesChart = () => {
   };
 
   return (
-    <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-      <CardContent>
-        <Box textAlign="center" mb={2}>
-          <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            38.6%
-          </Typography>
+    <Card 
+      sx={{ 
+        height: '100%', 
+        width: '100%',
+        borderRadius: 2, 
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <CardContent 
+        sx={{ 
+          // padding: { xs: "16px", sm: "20px", md: "24px" }, 
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+        }}
+      >
+        <Box sx={{ flex: 1, minHeight: 0 }}>
+          <HighchartsReact highcharts={Highcharts} options={options} />
         </Box>
-        <HighchartsReact highcharts={Highcharts} options={options} />
       </CardContent>
     </Card>
   );

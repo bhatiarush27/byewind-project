@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent } from "@mui/material";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -83,9 +82,12 @@ const RevenueChart = () => {
     <Card
       sx={{
         height: "100%",
+        width: "100%",
         borderRadius: 2,
         boxShadow: "0",
         backgroundColor: "var(--color-background-graph-light)",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardContent>

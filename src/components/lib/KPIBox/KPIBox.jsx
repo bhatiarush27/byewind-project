@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import { TrendingUp, TrendingDown } from "@mui/icons-material";
+import PropTypes from "prop-types";
 import styles from "./KPIBox.module.css";
 
 const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
@@ -8,16 +8,19 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
     <Card
       sx={{
         height: "100%",
+        width: "100%",
         borderRadius: "16px",
         boxShadow: "0",
-        minWidth: "fit-content",
+        minHeight: { xs: "120px", sm: "140px", md: "160px", lg: "180px" },
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardContent
         className={styles[semantic]}
         sx={{
           gap: "8px",
-          padding: "24px",
+          padding: { xs: "16px", sm: "20px", md: "24px" },
           height: "100%",
           display: "flex",
           flexDirection: "column",
@@ -28,8 +31,9 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
           gutterBottom
           sx={{
             fontWeight: "600",
-            fontSize: "14px",
+            fontSize: { xs: "12px", sm: "13px", md: "14px" },
             color: "var(--color-text-primary)",
+            lineHeight: 1.2,
           }}
         >
           {title}
@@ -38,23 +42,26 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          gap={"12px"}
+          gap={{ xs: "8px", sm: "10px", md: "12px" }}
+          flexWrap="wrap"
         >
           <Typography
             sx={{
               fontWeight: "700",
-              fontSize: "24px",
+              fontSize: { xs: "18px", sm: "20px", md: "24px" },
               color: "var(--color-text-primary)",
-              lineHeight: "36px",
+              lineHeight: { xs: "24px", sm: "28px", md: "36px" },
+              flex: "1 1 auto",
+              minWidth: 0,
             }}
           >
             {value}
           </Typography>
-          <Box display="flex" alignItems="center" gap={0.5}>
+          <Box display="flex" alignItems="center" gap={0.5} flexShrink={0}>
             <Typography
               sx={{
                 fontWeight: "600",
-                fontSize: "12px",
+                fontSize: { xs: "10px", sm: "11px", md: "12px" },
                 color: "var(--color-text-primary)",
               }}
             >
@@ -62,11 +69,17 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
             </Typography>
             {growthStatus === "positive" ? (
               <TrendingUp
-                sx={{ color: "--color-text-primary", fontSize: 16 }}
+                sx={{ 
+                  color: "var(--color-text-primary)", 
+                  fontSize: { xs: 14, sm: 15, md: 16 } 
+                }}
               />
             ) : (
               <TrendingDown
-                sx={{ color: "--color-text-primary", fontSize: 16 }}
+                sx={{ 
+                  color: "var(--color-text-primary)", 
+                  fontSize: { xs: 14, sm: 15, md: 16 } 
+                }}
               />
             )}
           </Box>
@@ -74,6 +87,14 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
       </CardContent>
     </Card>
   );
+};
+
+KPIBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  change: PropTypes.string.isRequired,
+  growthStatus: PropTypes.oneOf(['positive', 'negative']).isRequired,
+  semantic: PropTypes.string.isRequired,
 };
 
 export default KPIBox;
