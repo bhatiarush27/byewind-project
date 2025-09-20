@@ -1,0 +1,37 @@
+
+.selected {
+  background-color: var(--color-button-primary);
+  color: var(--color-text-primary);
+  border-radius: 12px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.subLinkWrapper {
+  color: #1c1c1c;
+  font-size: 14px;
+  padding: 8px 0 8px 46px !important;
+  width: 100%;
+}
+
+.subLinkWrapper:not(.selected):hover {
+  background-color: var(--color-background-hover);
+  border-radius: 12px;
+}
+
+.menuText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.nested {
+  padding: 8px 32px;
+}

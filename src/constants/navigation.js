@@ -1,250 +1,345 @@
-// Navigation constants with hierarchy and sub-links
-export const NAVIGATION_ITEMS = [
+import { getAllRoutesItems } from "../utils/index.js";
+
+
+// Quick Access sections (Favourites and Recents) - no icons, bullet points only
+export const FAVOURITES_ITEMS = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: 'PieChart',
-    path: '/',
-    hasSubItems: false
+    id: "default",
+    label: "Default",
+    path: "/default",
   },
   {
-    id: 'analytics',
-    label: 'Analytics',
-    icon: 'TrendingUp',
-    path: '/analytics',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'overview',
-        label: 'Overview',
-        path: '/analytics/overview',
-        icon: 'Visibility'
-      },
-      {
-        id: 'reports',
-        label: 'Reports',
-        path: '/analytics/reports',
-        icon: 'Assessment'
-      },
-      {
-        id: 'insights',
-        label: 'Insights',
-        path: '/analytics/insights',
-        icon: 'Lightbulb'
-      }
-    ]
+    id: "projects.alpha",
+    label: "Project Alpha",
+    path: "/projects/alpha",
   },
-  {
-    id: 'products',
-    label: 'Products',
-    icon: 'Inventory',
-    path: '/products',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'all-products',
-        label: 'All Products',
-        path: '/products/all',
-        icon: 'List'
-      },
-      {
-        id: 'categories',
-        label: 'Categories',
-        path: '/products/categories',
-        icon: 'Category'
-      },
-      {
-        id: 'inventory',
-        label: 'Inventory',
-        path: '/products/inventory',
-        icon: 'Warehouse'
-      },
-      {
-        id: 'add-product',
-        label: 'Add Product',
-        path: '/products/add',
-        icon: 'Add'
-      }
-    ]
-  },
-  {
-    id: 'orders',
-    label: 'Orders',
-    icon: 'ShoppingCart',
-    path: '/orders',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'all-orders',
-        label: 'All Orders',
-        path: '/orders/all',
-        icon: 'List'
-      },
-      {
-        id: 'pending',
-        label: 'Pending',
-        path: '/orders/pending',
-        icon: 'Schedule'
-      },
-      {
-        id: 'completed',
-        label: 'Completed',
-        path: '/orders/completed',
-        icon: 'CheckCircle'
-      },
-      {
-        id: 'cancelled',
-        label: 'Cancelled',
-        path: '/orders/cancelled',
-        icon: 'Cancel'
-      }
-    ]
-  },
-  {
-    id: 'customers',
-    label: 'Customers',
-    icon: 'People',
-    path: '/customers',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'all-customers',
-        label: 'All Customers',
-        path: '/customers/all',
-        icon: 'List'
-      },
-      {
-        id: 'new-customers',
-        label: 'New Customers',
-        path: '/customers/new',
-        icon: 'PersonAdd'
-      },
-      {
-        id: 'vip-customers',
-        label: 'VIP Customers',
-        path: '/customers/vip',
-        icon: 'Star'
-      }
-    ]
-  },
-  {
-    id: 'marketing',
-    label: 'Marketing',
-    icon: 'Campaign',
-    path: '/marketing',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'campaigns',
-        label: 'Campaigns',
-        path: '/marketing/campaigns',
-        icon: 'AdsClick'
-      },
-      {
-        id: 'email-marketing',
-        label: 'Email Marketing',
-        path: '/marketing/email',
-        icon: 'Email'
-      },
-      {
-        id: 'social-media',
-        label: 'Social Media',
-        path: '/marketing/social',
-        icon: 'Share'
-      }
-    ]
-  },
-  {
-    id: 'finance',
-    label: 'Finance',
-    icon: 'AttachMoney',
-    path: '/finance',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'transactions',
-        label: 'Transactions',
-        path: '/finance/transactions',
-        icon: 'SwapHoriz'
-      },
-      {
-        id: 'invoices',
-        label: 'Invoices',
-        path: '/finance/invoices',
-        icon: 'Receipt'
-      },
-      {
-        id: 'taxes',
-        label: 'Taxes',
-        path: '/finance/taxes',
-        icon: 'ReceiptLong'
-      }
-    ]
-  },
-  {
-    id: 'settings',
-    label: 'Settings',
-    icon: 'Settings',
-    path: '/settings',
-    hasSubItems: true,
-    subItems: [
-      {
-        id: 'general',
-        label: 'General',
-        path: '/settings/general',
-        icon: 'Tune'
-      },
-      {
-        id: 'security',
-        label: 'Security',
-        path: '/settings/security',
-        icon: 'Security'
-      },
-      {
-        id: 'notifications',
-        label: 'Notifications',
-        path: '/settings/notifications',
-        icon: 'Notifications'
-      },
-      {
-        id: 'integrations',
-        label: 'Integrations',
-        path: '/settings/integrations',
-        icon: 'Extension'
-      }
-    ]
-  }
 ];
 
-// Helper function to get all routes for router setup
-export const getAllRoutes = () => {
-  const routes = [];
-  
-  NAVIGATION_ITEMS.forEach(item => {
-    routes.push(item.path);
-    if (item.hasSubItems && item.subItems) {
-      item.subItems.forEach(subItem => {
-        routes.push(subItem.path);
-      });
-    }
-  });
-  
-  return routes;
-};
+export const RECENTS_ITEMS = [
+  {
+    id: "user-profile.personal-info",
+    label: "Personal Information",
+    path: "/user-profile/personal-info",
+  },
+  {
+    id: "user-profile.account-settings",
+    label: "Account Settings",
+    path: "/user-profile/account-settings",
+  },
+];
 
-// Helper function to find navigation item by path
-export const findNavigationItemByPath = (path) => {
-  for (const item of NAVIGATION_ITEMS) {
-    if (item.path === path) {
-      return item;
-    }
-    if (item.hasSubItems && item.subItems) {
-      for (const subItem of item.subItems) {
-        if (subItem.path === path) {
-          return { ...item, activeSubItem: subItem };
-        }
-      }
-    }
-  }
-  return null;
-};
+// Main navigation sections with icons
+export const NAVIGATION_SECTIONS = [
+  {
+    id: "dashboards",
+    title: "Dashboards",
+    items: [
+      {
+        id: "default",
+        label: "Default",
+        icon: "Dashboard",
+        path: "/default",
+        hasSubItems: false,
+      },
+      {
+        id: "ecommerce",
+        label: "eCommerce",
+        icon: "ShoppingCart",
+        path: "/ecommerce",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "products",
+            label: "Products",
+            path: "/ecommerce/products",
+            icon: "Inventory",
+          },
+          {
+            id: "orders",
+            label: "Orders",
+            path: "/ecommerce/orders",
+            icon: "Receipt",
+          },
+          {
+            id: "customers",
+            label: "Customers",
+            path: "/ecommerce/customers",
+            icon: "People",
+          },
+          {
+            id: "analytics",
+            label: "Analytics",
+            path: "/ecommerce/analytics",
+            icon: "Analytics",
+          },
+        ],
+      },
+      {
+        id: "projects",
+        label: "Projects",
+        icon: "Folder",
+        path: "/projects",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "alpha",
+            label: "Project Alpha",
+            path: "/projects/alpha",
+            icon: "Circle",
+          },
+          {
+            id: "beta",
+            label: "Project Beta",
+            path: "/projects/beta",
+            icon: "Circle",
+          },
+          {
+            id: "gamma",
+            label: "Project Gamma",
+            path: "/projects/gamma",
+            icon: "Circle",
+          },
+        ],
+      },
+      {
+        id: "online-courses",
+        label: "Online Courses",
+        icon: "School",
+        path: "/online-courses",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "web-dev",
+            label: "Web Development",
+            path: "/courses/web-dev",
+            icon: "Code",
+          },
+          {
+            id: "data-science",
+            label: "Data Science",
+            path: "/courses/data-science",
+            icon: "DataObject",
+          },
+          {
+            id: "design",
+            label: "UI/UX Design",
+            path: "/courses/design",
+            icon: "Palette",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "pages",
+    title: "Pages",
+    items: [
+      {
+        id: "user-profile",
+        label: "User Profile",
+        icon: "Person",
+        path: "/user-profile",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "personal-info",
+            label: "Personal Information",
+            path: "/user-profile/personal-info",
+            icon: "Info",
+          },
+          {
+            id: "account-settings",
+            label: "Account Settings",
+            path: "/user-profile/account-settings",
+            icon: "Settings",
+          },
+          {
+            id: "privacy",
+            label: "Privacy & Security",
+            path: "/user-profile/privacy",
+            icon: "Security",
+          },
+        ],
+      },
+      {
+        id: "account",
+        label: "Account",
+        icon: "AccountCircle",
+        path: "/account",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "billing",
+            label: "Billing",
+            path: "/account/billing",
+            icon: "Payment",
+          },
+          {
+            id: "subscriptions",
+            label: "Subscriptions",
+            path: "/account/subscriptions",
+            icon: "Subscriptions",
+          },
+          {
+            id: "invoices",
+            label: "Invoices",
+            path: "/account/invoices",
+            icon: "Receipt",
+          },
+        ],
+      },
+      {
+        id: "corporate",
+        label: "Corporate",
+        icon: "Business",
+        path: "/corporate",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "about",
+            label: "About Us",
+            path: "/corporate/about",
+            icon: "Info",
+          },
+          {
+            id: "team",
+            label: "Our Team",
+            path: "/corporate/team",
+            icon: "Groups",
+          },
+          {
+            id: "careers",
+            label: "Careers",
+            path: "/corporate/careers",
+            icon: "Work",
+          },
+        ],
+      },
+      {
+        id: "blog",
+        label: "Blog",
+        icon: "Article",
+        path: "/blog",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "latest-posts",
+            label: "Latest Posts",
+            path: "/blog/latest-posts",
+            icon: "Newspaper",
+          },
+          {
+            id: "categories",
+            label: "Categories",
+            path: "/blog/categories",
+            icon: "Category",
+          },
+          {
+            id: "tags",
+            label: "Tags",
+            path: "/blog/tags",
+            icon: "LocalOffer",
+          },
+        ],
+      },
+      {
+        id: "social",
+        label: "Social",
+        icon: "Share",
+        path: "/social",
+        hasSubItems: true,
+        subItems: [
+          {
+            id: "feed",
+            label: "Social Feed",
+            path: "/social/feed",
+            icon: "DynamicFeed",
+          },
+          {
+            id: "connections",
+            label: "Connections",
+            path: "/social/connections",
+            icon: "People",
+          },
+          {
+            id: "messages",
+            label: "Messages",
+            path: "/social/messages",
+            icon: "Message",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const ECOMMERCE_ITEMS = [
+  {
+    id: "ecommerce.products",
+    label: "Products",
+    path: "/ecommerce/products",
+  },
+  {
+    id: "ecommerce.orders",
+    label: "Orders",
+    path: "/ecommerce/orders",
+  },
+  {
+    id: "ecommerce.customers",
+    label: "Customers",
+    path: "/ecommerce/customers",
+  },
+];
+
+export const PROJECTS_ITEMS = [
+  {
+    id: "projects.alpha",
+    label: "Project Alpha",
+    path: "/projects/alpha",
+  },
+  {
+    id: "projects.beta",
+    label: "Project Beta",
+    path: "/projects/beta",
+  },
+  {
+    id: "projects.gamma",
+    label: "Project Gamma",
+    path: "/projects/gamma",
+  },
+  {
+    id: "projects.delta",
+    label: "Project Delta",
+    path: "/projects/delta",
+  },
+];
+
+export const COURSES_ITEMS = [
+  {
+    id: "courses.web-dev",
+    label: "Web Development",
+    path: "/courses/web-dev",
+  },
+  {
+    id: "courses.data-science",
+    label: "Data Science",
+    path: "/courses/data-science",
+  },
+  {
+    id: "courses.design",
+    label: "UI/UX Design",
+    path: "/courses/design",
+  },
+];
+
+
+
+
+// Legacy export for backward compatibility
+export const NAVIGATION_ITEMS = NAVIGATION_SECTIONS.flatMap(
+  (section) => section.items
+);
+
+export const ALL_ROUTES_ITEMS = getAllRoutesItems(NAVIGATION_ITEMS);
+
+console.log(getAllRoutesItems, "getAllRoutesItems");

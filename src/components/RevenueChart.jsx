@@ -1,78 +1,94 @@
-import React from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import { REVENUE_TREND_DATA } from '../constants/dashboardData';
+import React from "react";
+import { Card, CardContent } from "@mui/material";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { REVENUE_TREND_DATA } from "../constants/dashboardData";
 
 const RevenueChart = () => {
   const options = {
     chart: {
-      type: 'line',
-      backgroundColor: 'transparent',
-      height: 300
+      type: "spline", // Change line to spline for curved lines
+      backgroundColor: "transparent",
     },
     title: {
-      text: 'Revenue',
+      text: "Revenue |",
+      align: "left",
       style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
-    },
-    xAxis: {
-      categories: REVENUE_TREND_DATA.map(item => item.month),
-      title: {
-        text: 'Month'
-      }
-    },
-    yAxis: {
-      title: {
-        text: 'Revenue (K)'
-      }
-    },
-    series: [
-      {
-        name: 'Current Week',
-        data: REVENUE_TREND_DATA.map(item => item.current),
-        color: '#4A90E2',
-        lineWidth: 3
+        fontSize: "16px",
+        fontWeight: "bold",
       },
-      {
-        name: 'Previous Week',
-        data: REVENUE_TREND_DATA.map(item => item.previous),
-        color: '#94A3B8',
-        lineWidth: 2,
-        dashStyle: 'dash'
-      }
-    ],
-    plotOptions: {
-      line: {
-        marker: {
-          enabled: true,
-          radius: 4
-        }
-      }
     },
     legend: {
       enabled: true,
-      align: 'right',
-      verticalAlign: 'top'
+      align: "left",
+      verticalAlign: "top",
+      layout: "horizontal",
+      x: 80,
+      y: -10,
+      floating: true,
+    },
+    xAxis: {
+      categories: REVENUE_TREND_DATA.map((item) => item.month),
+    },
+    yAxis: {
+      min: 0,
+      max: 40,
+      tickInterval: 10,
+      labels: {
+        format: "{value}M",
+      },
+      title: {
+        text: "",
+      },
+    },
+    series: [
+      {
+        name: "Current Week",
+        data: REVENUE_TREND_DATA.map((item) => item.current),
+        color: "#4A90E2",
+        lineWidth: 3,
+      },
+      {
+        name: "Previous Week",
+        data: REVENUE_TREND_DATA.map((item) => item.previous),
+        color: "#94A3B8",
+        lineWidth: 2,
+        zoneAxis: "x",
+        zones: [
+          {
+            value: Math.floor(REVENUE_TREND_DATA.length / 2), // Half of the data points
+            dashStyle: "Solid",
+          },
+          {
+            dashStyle: "Dot", // Dotted line for the second half
+          },
+        ],
+      },
+    ],
+    plotOptions: {
+      spline: {
+        // Change line to spline for curved lines
+        marker: {
+          enabled: true,
+          radius: 4,
+        },
+      },
     },
     credits: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
 
   return (
-    <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+    <Card
+      sx={{
+        height: "100%",
+        borderRadius: 2,
+        boxShadow: "0",
+        backgroundColor: "var(--color-background-graph-light)",
+      }}
+    >
       <CardContent>
-        <Box mb={2}>
-          <Typography variant="body2" color="text.secondary">
-            Current Week $58,211
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Previous Week $68,768
-          </Typography>
-        </Box>
         <HighchartsReact highcharts={Highcharts} options={options} />
       </CardContent>
     </Card>

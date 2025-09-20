@@ -1,0 +1,134 @@
+.quickAccessSection {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-background-paper);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+  position: relative;
+}
+
+.tab {
+  font-weight: 500;
+  min-width: 100px;
+  color: red;
+}
+
+.selectedTab {
+  color: var(--color-text-secondary) !important;
+  font-weight: 700 !important;
+  border-bottom: 3px solid black;
+}
+
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 12px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: 2px;
+}
+
+.itemsList {
+  padding: 0;
+}
+
+.itemButton {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin: 0 0 var(--spacing-xs) 0;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: all 0.2s ease;
+  min-height: 32px;
+}
+
+.itemButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.itemButtonActive {
+  background-color: black;
+}
+
+.bulletPoint {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-text-secondary);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.itemButton:hover .bulletPoint {
+  background-color: var(--color-primary);
+  transform: scale(1.2);
+}
+
+.itemButtonActive .bulletPoint {
+  background-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.itemText {
+  flex-grow: 1;
+}
+
+.itemTextPrimary {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  transition: all 0.2s ease;
+}
+
+.itemTextActive {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.itemTextInactive {
+  color: var(--color-text-tertiary);
+}
+
+/* Dark mode adjustments */
+html[data-theme='dark'] .quickAccessSection {
+  background-color: var(--color-background-paper);
+}
+
+html[data-theme='dark'] .sectionTitle {
+  color: var(--color-text-primary);
+}
+
+html[data-theme='dark'] .itemTextActive {
+  color: var(--color-text-secondary);
+}
+
+html[data-theme='dark'] .itemTextInactive {
+  color: var(--color-text-tertiary);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .quickAccessSection {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .itemButton {
+    padding: var(--spacing-xs);
+    min-height: 28px;
+  }
+  
+  .bulletPoint {
+    width: 4px;
+    height: 4px;
+  }
+}

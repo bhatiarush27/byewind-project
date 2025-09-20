@@ -1,5 +1,5 @@
 // Design tokens index file
-export { colors, cssVariables as colorVariables } from './colors';
+export { cssVariables as colorVariables } from './colors';
 export { spacing, spacingVariables } from './spacing';
 export { typography, typographyVariables } from './typography';
 export { shadows, shadowVariables } from './shadows';

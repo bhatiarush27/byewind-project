@@ -1,67 +1,81 @@
-import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import { PROJECTIONS_DATA } from '../constants/dashboardData';
+import React from "react";
+import { Card, CardContent } from "@mui/material";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { PROJECTIONS_DATA } from "../constants/dashboardData";
 
 const ProjectionsChart = () => {
   const options = {
     chart: {
-      type: 'column',
-      backgroundColor: 'transparent',
-      height: 300
+      type: "column",
+      backgroundColor: "transparent",
     },
     title: {
-      text: 'Projections vs Actuals',
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
+      text: "Projections vs Actuals",
     },
     xAxis: {
-      categories: PROJECTIONS_DATA.map(item => item.month),
-      title: {
-        text: 'Month'
-      }
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     },
-    yAxis: {
-      title: {
-        text: 'Value (M)'
-      },
-      min: 0,
-      max: 30
-    },
-    series: [
+    yAxis: [
       {
-        name: 'Actual',
-        data: PROJECTIONS_DATA.map(item => item.actual),
-        color: '#4A90E2'
+        min: 0,
+        title: {
+          text: "",
+        },
+        tickInterval: 10,
+        max: 30,
       },
       {
-        name: 'Projection',
-        data: PROJECTIONS_DATA.map(item => item.projection),
-        color: '#E2E8F0'
-      }
+        title: {
+          text: "",
+        },
+        opposite: true,
+      },
     ],
+    legend: {
+      enabled: false,
+    },
+    tooltip: {
+      shared: true,
+    },
     plotOptions: {
       column: {
-        borderRadius: 4,
-        groupPadding: 0.1,
-        pointPadding: 0.1
-      }
-    },
-    legend: {
-      enabled: true,
-      align: 'right',
-      verticalAlign: 'top'
+        grouping: false,
+        shadow: false,
+        borderWidth: 0,
+      },
     },
     credits: {
       enabled: false
-    }
+  },
+    series: [
+      {
+        name: "Actual",
+        color: "#D6E6F2",
+        data: [22, 25, 20, 26, 26, 30],
+        pointPadding: 0.2,
+        pointPlacement: 0.2,
+        borderRadius: 10,
+      },
+      {
+        name: "Projection",
+        color: "#A8C5DA",
+        data: [18, 20, 18, 24, 20, 28],
+        pointPadding: 0.2,
+        pointPlacement: 0.2,
+      },
+    ],
   };
 
   return (
-    <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+    <Card
+      sx={{
+        height: "100%",
+        borderRadius: '12px',
+        boxShadow: "0",
+        backgroundColor: "var(--color-background-graph-light)",
+      }}
+    >
       <CardContent>
         <HighchartsReact highcharts={Highcharts} options={options} />
       </CardContent>

@@ -15,6 +15,7 @@ import styles from './NavigationItem.module.css';
 
 const NavigationItem = ({ item, isMobile, onClose }) => {
   const [open, setOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -44,7 +45,9 @@ const NavigationItem = ({ item, isMobile, onClose }) => {
       <ListItem disablePadding>
         <ListItemButton
           onClick={handleClick}
-          className={`${styles.listItemButton} ${isActive || hasActiveSubItem ? styles.listItemButtonActive : ''}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className={`${styles.listItemButton} ${isActive || hasActiveSubItem ? styles.listItemButtonActive : ''} ${isHovered ? styles.listItemButtonHovered : ''}`}
         >
           <ListItemIcon className={styles.listItemIcon}>
             <IconRenderer 

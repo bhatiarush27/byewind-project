@@ -1,20 +1,43 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import ComingSoon from '../pages/ComingSoon';
+
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Main Dashboard Route */}
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Navigate to="/default" />} />
+      <Route path="/default" element={<Dashboard />} />
       
-      {/* Analytics Routes */}
+      {/* Favourites Routes */}
       <Route path="/analytics" element={<ComingSoon pageName="Analytics" />} />
-      <Route path="/analytics/overview" element={<ComingSoon pageName="Analytics Overview" />} />
-      <Route path="/analytics/reports" element={<ComingSoon pageName="Analytics Reports" />} />
-      <Route path="/analytics/insights" element={<ComingSoon pageName="Analytics Insights" />} />
+      
+      {/* Recents Routes */}
+      <Route path="/projects" element={<ComingSoon pageName="Projects" />} />
+      <Route path="/orders" element={<ComingSoon pageName="Orders" />} />
+      <Route path="/customers" element={<ComingSoon pageName="Customers" />} />
+      
+      {/* eCommerce Routes */}
+      <Route path="/ecommerce" element={<ComingSoon pageName="eCommerce Dashboard" />} />
+      <Route path="/ecommerce/products" element={<ComingSoon pageName="eCommerce Products" />} />
+      <Route path="/ecommerce/orders" element={<ComingSoon pageName="eCommerce Orders" />} />
+      <Route path="/ecommerce/customers" element={<ComingSoon pageName="eCommerce Customers" />} />
+      <Route path="/ecommerce/analytics" element={<ComingSoon pageName="eCommerce Analytics" />} />
+      
+      {/* Projects Routes */}
+      <Route path="/projects/alpha" element={<ComingSoon pageName="Project Alpha" />} />
+      <Route path="/projects/beta" element={<ComingSoon pageName="Project Beta" />} />
+      <Route path="/projects/gamma" element={<ComingSoon pageName="Project Gamma" />} />
+      <Route path="/projects/delta" element={<ComingSoon pageName="Project Delta" />} />
+      
+      {/* Online Courses Routes */}
+      <Route path="/courses" element={<ComingSoon pageName="Online Courses" />} />
+      <Route path="/courses/web-dev" element={<ComingSoon pageName="Web Development Course" />} />
+      <Route path="/courses/data-science" element={<ComingSoon pageName="Data Science Course" />} />
+      <Route path="/courses/design" element={<ComingSoon pageName="UI/UX Design Course" />} />
       
       {/* Products Routes */}
       <Route path="/products" element={<ComingSoon pageName="Products" />} />
@@ -48,7 +71,39 @@ const AppRoutes = () => {
       <Route path="/finance/invoices" element={<ComingSoon pageName="Invoices" />} />
       <Route path="/finance/taxes" element={<ComingSoon pageName="Taxes" />} />
       
-      {/* Settings Routes */}
+      {/* Pages Routes - User Profile */}
+      <Route path="/profile" element={<ComingSoon pageName="User Profile" />} />
+      <Route path="/profile/personal" element={<ComingSoon pageName="Personal Information" />} />
+      <Route path="/profile/settings" element={<ComingSoon pageName="Account Settings" />} />
+      <Route path="/profile/privacy" element={<ComingSoon pageName="Privacy & Security" />} />
+      
+      {/* Pages Routes - Account */}
+      <Route path="/account/billing" element={<ComingSoon pageName="Billing" />} />
+      <Route path="/account/subscriptions" element={<ComingSoon pageName="Subscriptions" />} />
+      <Route path="/account/invoices" element={<ComingSoon pageName="Invoices" />} />
+      
+      {/* Pages Routes - Corporate */}
+      <Route path="/corporate/about" element={<ComingSoon pageName="About Us" />} />
+      <Route path="/corporate/team" element={<ComingSoon pageName="Our Team" />} />
+      <Route path="/corporate/careers" element={<ComingSoon pageName="Careers" />} />
+      
+      {/* Pages Routes - Blog */}
+      <Route path="/blog/latest-posts" element={<ComingSoon pageName="Latest Posts" />} />
+      <Route path="/blog/categories" element={<ComingSoon pageName="Categories" />} />
+      <Route path="/blog/tags" element={<ComingSoon pageName="Tags" />} />
+
+      {/* Pages Routes - User Profile */}
+      <Route path="/user-profile/personal-info" element={<ComingSoon pageName="Personal Information" />} />
+      <Route path="/user-profile/account-settings" element={<ComingSoon pageName="Account Settings" />} />
+      <Route path="/user-profile/privacy" element={<ComingSoon pageName="Privacy & Security" />} />
+      
+      {/* Pages Routes - Social */}
+      <Route path="/social" element={<ComingSoon pageName="Social" />} />
+      <Route path="/social/feed" element={<ComingSoon pageName="Social Feed" />} />
+      <Route path="/social/connections" element={<ComingSoon pageName="Connections" />} />
+      <Route path="/social/messages" element={<ComingSoon pageName="Messages" />} />
+      
+      {/* Legacy Settings Routes */}
       <Route path="/settings" element={<ComingSoon pageName="Settings" />} />
       <Route path="/settings/general" element={<ComingSoon pageName="General Settings" />} />
       <Route path="/settings/security" element={<ComingSoon pageName="Security Settings" />} />

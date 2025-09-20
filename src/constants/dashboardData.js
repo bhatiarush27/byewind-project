@@ -6,7 +6,7 @@ export const KEY_METRICS = [
     value: '3,781',
     change: '+11.01%',
     isPositive: true,
-    icon: '👥'
+    semantic: 'information'
   },
   {
     id: 'orders',
@@ -14,7 +14,7 @@ export const KEY_METRICS = [
     value: '1,219',
     change: '-0.03%',
     isPositive: false,
-    icon: '📦'
+    semantic: 'neutral'
   },
   {
     id: 'revenue',
@@ -22,7 +22,7 @@ export const KEY_METRICS = [
     value: '$695',
     change: '+15.03%',
     isPositive: true,
-    icon: '💰'
+    semantic: 'neutral'
   },
   {
     id: 'growth',
@@ -30,7 +30,7 @@ export const KEY_METRICS = [
     value: '30.1%',
     change: '+6.08%',
     isPositive: true,
-    icon: '📈'
+    semantic: 'tertiary'
   }
 ];
 
@@ -44,12 +44,12 @@ export const PROJECTIONS_DATA = [
 ];
 
 export const REVENUE_TREND_DATA = [
-  { month: 'Jan', current: 45, previous: 50 },
-  { month: 'Feb', current: 52, previous: 48 },
-  { month: 'Mar', current: 48, previous: 55 },
-  { month: 'Apr', current: 58, previous: 52 },
-  { month: 'May', current: 62, previous: 58 },
-  { month: 'Jun', current: 58, previous: 68 }
+  { month: 'Jan', current: 12, previous: 18 },
+  { month: 'Feb', current: 22, previous: 8 },
+  { month: 'Mar', current: 24, previous: 10 },
+  { month: 'Apr', current: 16, previous: 20 },
+  { month: 'May', current: 18, previous: 22 },
+  { month: 'Jun', current: 22, previous: 18 }
 ];
 
 export const REVENUE_BY_LOCATION = [

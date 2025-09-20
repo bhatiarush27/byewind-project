@@ -1,0 +1,13 @@
+
+
+.information {
+  background-color: var(--color-background-information-light);
+}
+
+.neutral {
+  background-color: var(--color-background-neutral-light);
+}
+
+.tertiary {
+  background-color: var(--color-background-tertiary-light);
+}
