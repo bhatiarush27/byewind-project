@@ -1,8 +1,8 @@
-import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import ComingSoon from '../pages/ComingSoon';
+import Orders from '../pages/Orders';
 
 
 const AppRoutes = () => {
@@ -15,15 +15,10 @@ const AppRoutes = () => {
       {/* Favourites Routes */}
       <Route path="/analytics" element={<ComingSoon pageName="Analytics" />} />
       
-      {/* Recents Routes */}
-      <Route path="/projects" element={<ComingSoon pageName="Projects" />} />
-      <Route path="/orders" element={<ComingSoon pageName="Orders" />} />
-      <Route path="/customers" element={<ComingSoon pageName="Customers" />} />
-      
       {/* eCommerce Routes */}
       <Route path="/ecommerce" element={<ComingSoon pageName="eCommerce Dashboard" />} />
       <Route path="/ecommerce/products" element={<ComingSoon pageName="eCommerce Products" />} />
-      <Route path="/ecommerce/orders" element={<ComingSoon pageName="eCommerce Orders" />} />
+      <Route path="/ecommerce/orders" element={<Orders />} />
       <Route path="/ecommerce/customers" element={<ComingSoon pageName="eCommerce Customers" />} />
       <Route path="/ecommerce/analytics" element={<ComingSoon pageName="eCommerce Analytics" />} />
       

@@ -43,7 +43,6 @@ const AppContent = () => {
       <BrowserRouter>
         <AppShell>
           <AppRoutes />
-          <h1>Hello</h1>
         </AppShell>
         
       </BrowserRouter>
