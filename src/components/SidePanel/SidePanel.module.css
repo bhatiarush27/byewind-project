@@ -23,7 +23,6 @@
 /* Brand Section */
 .brandSection {
   padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -61,9 +60,8 @@
 
 .sectionTitle {
   font-size: 12px;
-  font-weight: 600;
-  color: #666666;
-  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
   letter-spacing: 0.5px;
   padding: 16px 20px 8px 20px;
   margin: 0;

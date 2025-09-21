@@ -10,42 +10,42 @@ import {
 } from "@mui/icons-material";
 
 export const LEFT_PANEL_DATA = [
+  // {
+  //   title: "FAVOURITES",
+  //   items: [
+  //     {
+  //       key: "default",
+  //       label: "Default",
+  //       path: "/default",
+  //       icon: <PieChartIconOutlined fontSize="small" />,
+  //     },
+  //     {
+  //       key: "project-alpha",
+  //       label: "Project Alpha",
+  //       path: "/project-alpha",
+  //       icon: <FolderIconOutlined fontSize="small" />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "RECENTS",
+  //   items: [
+  //     {
+  //       key: "analytics",
+  //       label: "Analytics",
+  //       path: "/analytics",
+  //       icon: <PieChartIconOutlined fontSize="small" />,
+  //     },
+  //     {
+  //       key: "ecommerce-dashboard",
+  //       label: "eCommerce Dashboard",
+  //       path: "/ecommerce",
+  //       icon: <ShoppingCartIconOutlined fontSize="small" />,
+  //     },
+  //   ],
+  // },
   {
-    title: "FAVOURITES",
-    items: [
-      {
-        key: "default",
-        label: "Default",
-        path: "/default",
-        icon: <PieChartIconOutlined fontSize="small" />,
-      },
-      {
-        key: "project-alpha",
-        label: "Project Alpha",
-        path: "/project-alpha",
-        icon: <FolderIconOutlined fontSize="small" />,
-      },
-    ],
-  },
-  {
-    title: "RECENTS",
-    items: [
-      {
-        key: "analytics",
-        label: "Analytics",
-        path: "/analytics",
-        icon: <PieChartIconOutlined fontSize="small" />,
-      },
-      {
-        key: "ecommerce-dashboard",
-        label: "eCommerce Dashboard",
-        path: "/ecommerce",
-        icon: <ShoppingCartIconOutlined fontSize="small" />,
-      },
-    ],
-  },
-  {
-    title: "DASHBOARDS",
+    title: "Dashboards",
     items: [
       {
         key: "default-dashboard",
@@ -63,31 +63,26 @@ export const LEFT_PANEL_DATA = [
             key: "ecommerce-dashboard",
             label: "Dashboard",
             path: "/ecommerce",
-            icon: <PieChartIconOutlined fontSize="small" />,
           },
           {
             key: "ecommerce-products",
             label: "Products",
             path: "/ecommerce/products",
-            icon: <ShoppingCartIconOutlined fontSize="small" />,
           },
           {
             key: "ecommerce-orders",
             label: "Orders",
             path: "/ecommerce/orders",
-            icon: <ShoppingCartIconOutlined fontSize="small" />,
           },
           {
             key: "ecommerce-customers",
             label: "Customers",
             path: "/ecommerce/customers",
-            icon: <PersonIconOutlined fontSize="small" />,
           },
           {
             key: "ecommerce-analytics",
             label: "Analytics",
             path: "/ecommerce/analytics",
-            icon: <PieChartIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -101,13 +96,11 @@ export const LEFT_PANEL_DATA = [
             key: "projects-list",
             label: "Project List",
             path: "/projects",
-            icon: <FolderIconOutlined fontSize="small" />,
           },
           {
             key: "projects-create",
             label: "Create Project",
             path: "/projects/create",
-            icon: <FolderIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -121,20 +114,18 @@ export const LEFT_PANEL_DATA = [
             key: "courses-list",
             label: "Course List",
             path: "/courses",
-            icon: <BookIconOutlined fontSize="small" />,
           },
           {
             key: "courses-create",
             label: "Create Course",
             path: "/courses/create",
-            icon: <BookIconOutlined fontSize="small" />,
           },
         ],
       },
     ],
   },
   {
-    title: "PAGES",
+    title: "Pages",
     items: [
       {
         key: "user-profile",
@@ -146,13 +137,11 @@ export const LEFT_PANEL_DATA = [
             key: "user-profile-view",
             label: "View Profile",
             path: "/user-profile",
-            icon: <PersonIconOutlined fontSize="small" />,
           },
           {
             key: "user-profile-edit",
             label: "Edit Profile",
             path: "/user-profile/edit",
-            icon: <PersonIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -166,13 +155,11 @@ export const LEFT_PANEL_DATA = [
             key: "account-settings",
             label: "Settings",
             path: "/account/settings",
-            icon: <AccountBalanceIconOutlined fontSize="small" />,
           },
           {
             key: "account-billing",
             label: "Billing",
             path: "/account/billing",
-            icon: <AccountBalanceIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -186,13 +173,11 @@ export const LEFT_PANEL_DATA = [
             key: "corporate-about",
             label: "About",
             path: "/corporate/about",
-            icon: <AccountBalanceIconOutlined fontSize="small" />,
           },
           {
             key: "corporate-contact",
             label: "Contact",
             path: "/corporate/contact",
-            icon: <AccountBalanceIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -206,13 +191,11 @@ export const LEFT_PANEL_DATA = [
             key: "blog-list",
             label: "Blog List",
             path: "/blog",
-            icon: <ArticleIconOutlined fontSize="small" />,
           },
           {
             key: "blog-create",
             label: "Create Post",
             path: "/blog/create",
-            icon: <ArticleIconOutlined fontSize="small" />,
           },
         ],
       },
@@ -226,13 +209,11 @@ export const LEFT_PANEL_DATA = [
             key: "social-feed",
             label: "Feed",
             path: "/social",
-            icon: <GroupIconOutlined fontSize="small" />,
           },
           {
             key: "social-connections",
             label: "Connections",
             path: "/social/connections",
-            icon: <GroupIconOutlined fontSize="small" />,
           },
         ],
       },

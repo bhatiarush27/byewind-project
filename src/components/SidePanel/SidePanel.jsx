@@ -22,17 +22,18 @@ import {
   ExpandLess as ExpandLessIcon,
   Close as CloseIcon,
 } from "@mui/icons-material";
+import { DEFAULT_USER } from "../../constants/rightPanelData.js";
 import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./SidePanel.module.css";
 
-const SidePanel = ({ 
-  isOpen, 
-  onClose, 
-  position = "left", 
+const SidePanel = ({
+  isOpen,
+  onClose,
+  position = "left",
   panelType = "navigation", // "navigation" or "right"
   navigationData = null,
-  rightPanelData = null 
+  rightPanelData = null,
 }) => {
   const [expandedItems, setExpandedItems] = useState({});
   const navigate = useNavigate();
@@ -109,7 +110,9 @@ const SidePanel = ({
         {hasChildren && (
           <Collapse in={isExpanded} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {item.children.map((child) => renderNavigationItem(child, level + 1))}
+              {item.children.map((child) =>
+                renderNavigationItem(child, level + 1)
+              )}
             </List>
           </Collapse>
         )}
@@ -124,7 +127,9 @@ const SidePanel = ({
       <Box className={styles.rightPanelContent}>
         {/* Header - Just the title */}
         <Box className={styles.rightPanelHeader}>
-          <Typography className={styles.rightPanelTitle}>Notifications</Typography>
+          <Typography className={styles.rightPanelTitle}>
+            Notifications
+          </Typography>
         </Box>
 
         {/* Notifications Section */}
@@ -138,8 +143,12 @@ const SidePanel = ({
                 <ListItemText
                   primary={notification.message}
                   secondary={notification.time}
-                  primaryTypographyProps={{ className: styles.rightPanelPrimaryText }}
-                  secondaryTypographyProps={{ className: styles.rightPanelSecondaryText }}
+                  primaryTypographyProps={{
+                    className: styles.rightPanelPrimaryText,
+                  }}
+                  secondaryTypographyProps={{
+                    className: styles.rightPanelSecondaryText,
+                  }}
                 />
               </ListItem>
             ))}
@@ -160,8 +169,12 @@ const SidePanel = ({
                 <ListItemText
                   primary={activity.message}
                   secondary={activity.time}
-                  primaryTypographyProps={{ className: styles.rightPanelPrimaryText }}
-                  secondaryTypographyProps={{ className: styles.rightPanelSecondaryText }}
+                  primaryTypographyProps={{
+                    className: styles.rightPanelPrimaryText,
+                  }}
+                  secondaryTypographyProps={{
+                    className: styles.rightPanelSecondaryText,
+                  }}
                 />
               </ListItem>
             ))}
@@ -178,12 +191,18 @@ const SidePanel = ({
           <List>
             {rightPanelData.contacts?.map((contact, index) => (
               <ListItem key={index} className={styles.rightPanelListItem}>
-                <Avatar className={styles.rightPanelAvatar}>{contact.avatar}</Avatar>
+                <Avatar className={styles.rightPanelAvatar}>
+                  {contact.avatar}
+                </Avatar>
                 <ListItemText
                   primary={contact.name}
                   secondary={contact.status}
-                  primaryTypographyProps={{ className: styles.rightPanelPrimaryText }}
-                  secondaryTypographyProps={{ className: styles.rightPanelSecondaryText }}
+                  primaryTypographyProps={{
+                    className: styles.rightPanelPrimaryText,
+                  }}
+                  secondaryTypographyProps={{
+                    className: styles.rightPanelSecondaryText,
+                  }}
                 />
               </ListItem>
             ))}
@@ -201,9 +220,17 @@ const SidePanel = ({
     if (panelType === "navigation" && navigationData) {
       return (
         <Box className={styles.drawerContent}>
-          {/* Brand Section */}
           <Box className={styles.brandSection}>
-            <Typography className={styles.brandText}>BW</Typography>
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                fontSize: "0.875rem",
+                bgcolor: "primary.main",
+                color: "white",
+              }}
+              src={DEFAULT_USER.avatar}
+            />
             <Typography className={styles.brandName}>ByeWind</Typography>
           </Box>
 
@@ -217,9 +244,6 @@ const SidePanel = ({
                 <List className={styles.navigationList}>
                   {section.items.map((item) => renderNavigationItem(item))}
                 </List>
-                {section.title !== "PAGES" && (
-                  <Divider className={styles.sectionDivider} />
-                )}
               </Box>
             ))}
           </Box>
@@ -230,8 +254,8 @@ const SidePanel = ({
     return null;
   };
 
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  const isTablet = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const isDesktop = !isMobile && !isTablet;
 
   // For left panel: show on desktop always, or on mobile/tablet when isOpen
@@ -246,7 +270,9 @@ const SidePanel = ({
       anchor={position}
       open={isOpen}
       onClose={onClose}
-      className={`${styles.drawer} ${position === "right" ? styles.rightDrawer : ""}`}
+      className={`${styles.drawer} ${
+        position === "right" ? styles.rightDrawer : ""
+      }`}
       sx={{
         width: position === "right" ? 320 : 280,
         flexShrink: 0,

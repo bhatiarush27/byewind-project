@@ -412,7 +412,7 @@ export default function OrdersTable() {
       order.project.toLowerCase() === appliedFilters.project.toLowerCase();
     const searchMatch =
       debouncedSearchText === "" ||
-      order.customer.toLowerCase().includes(debouncedSearchText.toLowerCase());
+      order.customer.name.toLowerCase().includes(debouncedSearchText.toLowerCase());
 
     if (statusMatch && projectMatch && searchMatch) {
       return true;
@@ -511,10 +511,8 @@ export default function OrdersTable() {
                             bgcolor: "primary.main",
                             color: "white",
                           }}
-                        >
-                          {getUserInitials(row.customer)}
-                        </Avatar>
-                        <Typography variant="body2">{row.customer}</Typography>
+                         src={row.customer.avatar} />
+                        <Typography variant="body2">{row.customer.name}</Typography>
                       </Box>
                     </TableCell>
                     <TableCell align="left">

@@ -13,6 +13,7 @@ import {
   ListItemText,
   Avatar,
   Divider,
+  Tooltip,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -21,11 +22,13 @@ import {
   ViewSidebar as PanelRightIcon,
   History as HistoryIcon,
   Contacts as ContactsIcon,
+  BugReportOutlined as BugReportIcon,
+  PersonAddOutlined as PersonAddIcon,
 } from "@mui/icons-material";
 import { ThemeToggle } from "../lib";
 import styles from "./AppShell.module.css";
 import SidePanel from "../SidePanel/SidePanel";
-import { RIGHT_PANEL_DATA } from "../../constants/rightPanelData.jsx";
+import { RIGHT_PANEL_DATA } from "../../constants/rightPanelData.js";
 import { LEFT_PANEL_DATA } from "../../constants/leftPanelData.jsx";
 import PropTypes from "prop-types";
 
@@ -36,7 +39,6 @@ const AppShell = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [rightPanelOpen, setRightPanelOpen] = useState(true);
 
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -45,7 +47,18 @@ const AppShell = ({ children }) => {
     setRightPanelOpen(!rightPanelOpen);
   };
 
-
+  const getIconFromNotificationType = (notificationType) => {
+    switch (notificationType) {
+      case "BUG":
+        return <BugReportIcon fontSize="small" color="primary" />;
+      case "USER_REGISTERED":
+        return <PersonAddIcon fontSize="small" color="primary" />;
+      case "USER_SUBSCRIPTION":
+        return <PersonAddIcon fontSize="small" color="primary" />;
+      default:
+        return <NotificationsIcon fontSize="small" color="primary" />;
+    }
+  };
 
   // Left panel is now handled by SidePanel component
 
@@ -60,14 +73,15 @@ const AppShell = ({ children }) => {
           isMobile || isTablet ? styles.appBarMobile : ""
         }`}
         sx={{
-          width: { xs: '100%', md: 'calc(100% - 280px)' },
-          marginLeft: { xs: 0, md: '280px' },
-          marginRight: { xs: 0, md: rightPanelOpen ? '320px' : 0 },
-          backgroundColor: '#ffffff',
-          color: '#212121',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
-          borderBottom: '1px solid #e0e0e0',
-          zIndex: 1200
+          width: { xs: "100%", md: "calc(100% - 280px)" },
+          marginLeft: { xs: 0, md: "280px" },
+          marginRight: { xs: 0, md: rightPanelOpen ? "320px" : 0 },
+          backgroundColor: "#ffffff",
+          color: "#212121",
+          boxShadow:
+            "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)",
+          borderBottom: "1px solid #e0e0e0",
+          zIndex: 1200,
         }}
       >
         <Toolbar className={styles.toolbar}>
@@ -89,25 +103,22 @@ const AppShell = ({ children }) => {
               display: 'block',
               lineHeight: '64px'
             }}
-          >
-            Test
-          </div>
+          />
           <Box className={styles.headerActions}>
-            <ThemeToggle />
-            <Badge badgeContent={4} color="error">
-              <NotificationsIcon />
-            </Badge>
-            <HistoryIcon />
-            <ContactsIcon />
+            <Tooltip title="Toggle Dark/Light Mode">
+              <ThemeToggle />
+            </Tooltip>
+            <Tooltip title="Refresh">
+              <HistoryIcon />
+            </Tooltip>
             <PanelRightIcon
               onClick={handleRightPanelToggle}
               sx={{
-                cursor: 'pointer',
-                color: rightPanelOpen ? '#2196f3' : '#666666',
-                transition: 'color 0.2s ease'
+                cursor: "pointer",
+                color: rightPanelOpen ? "#2196f3" : "#666666",
+                transition: "color 0.2s ease",
               }}
             />
-            <AccountCircleIcon />
           </Box>
         </Toolbar>
       </AppBar>
@@ -152,130 +163,169 @@ const AppShell = ({ children }) => {
             },
           }}
         >
-        <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-          {/* Header */}
-          <Box sx={{ padding: '16px 20px', borderBottom: '1px solid #e0e0e0', backgroundColor: '#fafafa' }}>
-            <Typography sx={{ fontSize: '16px', fontWeight: 600, color: '#333333', margin: 0 }}>
-              Notifications
-            </Typography>
+          <Box
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              padding: "20px 10px",
+            }}
+          >
+            {/* Notifications Section */}
+            <Box sx={{ padding: "8px 12px" }}>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Notifications
+              </Typography>
+              <List>
+                {RIGHT_PANEL_DATA.notifications?.map((notification, index) => (
+                  <ListItem key={index} sx={{ padding: "4px 0" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginRight: "12px",
+                        borderRadius: "50%",
+                        backgroundColor: "#e3f2fd",
+                        width: "32px",
+                        height: "32px",
+                      }}
+                    >
+                      {getIconFromNotificationType(
+                        notification.notificationType
+                      )}
+                    </Box>
+                    <ListItemText
+                      primary={notification.message}
+                      secondary={notification.time}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "13px",
+                          color: "#333333",
+                          lineHeight: 1.4,
+                        },
+                      }}
+                      secondaryTypographyProps={{
+                        sx: {
+                          fontSize: "14px",
+                          color: "#666666",
+                          marginTop: "4px",
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+
+            {/* Activities Section */}
+            <Box sx={{ padding: "8px 12px" }}>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "#333333",
+                  marginBottom: "4px",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Activities
+              </Typography>
+              <List>
+                {RIGHT_PANEL_DATA.activities?.map((activity, index) => (
+                  <ListItem key={index} sx={{ padding: "4px 0" }}>
+                    <Avatar
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        backgroundColor: "#e3f2fd",
+                        color: "#1976d2",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        marginRight: "12px",
+                      }}
+                      src={activity.user.avatar}
+                    />
+                    <ListItemText
+                      primary={activity.message}
+                      secondary={activity.time}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "13px",
+                          color: "#333333",
+                          lineHeight: 1.4,
+                        },
+                      }}
+                      secondaryTypographyProps={{
+                        sx: {
+                          fontSize: "11px",
+                          color: "#666666",
+                          marginTop: "4px",
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+
+            {/* Contacts Section */}
+            <Box sx={{ padding: "8px 12px" }}>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "#333333",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Contacts
+              </Typography>
+              <List>
+                {RIGHT_PANEL_DATA.contacts?.map((contact, index) => (
+                  <ListItem key={index} sx={{ padding: "4px 0" }}>
+                    <Avatar
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        backgroundColor: "#e3f2fd",
+                        color: "#1976d2",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        marginRight: "12px",
+                      }}
+                      src={contact.user.avatar}
+                    />
+                    <ListItemText
+                      primary={contact.name}
+                      secondary={contact.status}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "13px",
+                          color: "#333333",
+                          lineHeight: 1.4,
+                        },
+                      }}
+                      secondaryTypographyProps={{
+                        sx: {
+                          fontSize: "11px",
+                          color: "#666666",
+                          marginTop: "4px",
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
           </Box>
-
-          {/* Notifications Section */}
-          <Box sx={{ padding: '20px' }}>
-            <Typography sx={{ 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              color: '#333333', 
-              marginBottom: '16px', 
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}>
-              Notifications
-            </Typography>
-            <List>
-              {RIGHT_PANEL_DATA.notifications?.map((notification, index) => (
-                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
-                  <ListItemText
-                    primary={notification.message}
-                    secondary={notification.time}
-                    primaryTypographyProps={{ 
-                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
-                    }}
-                    secondaryTypographyProps={{ 
-                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
-                    }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-
-          <Divider sx={{ margin: '0 20px', backgroundColor: '#e0e0e0' }} />
-
-          {/* Activities Section */}
-          <Box sx={{ padding: '20px' }}>
-            <Typography sx={{ 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              color: '#333333', 
-              marginBottom: '16px', 
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}>
-              Activities
-            </Typography>
-            <List>
-              {RIGHT_PANEL_DATA.activities?.map((activity, index) => (
-                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
-                  <Avatar sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    backgroundColor: '#e3f2fd', 
-                    color: '#1976d2', 
-                    fontSize: '12px', 
-                    fontWeight: 600, 
-                    marginRight: '12px' 
-                  }}>
-                    A
-                  </Avatar>
-                  <ListItemText
-                    primary={activity.message}
-                    secondary={activity.time}
-                    primaryTypographyProps={{ 
-                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
-                    }}
-                    secondaryTypographyProps={{ 
-                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
-                    }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-
-          <Divider sx={{ margin: '0 20px', backgroundColor: '#e0e0e0' }} />
-
-          {/* Contacts Section */}
-          <Box sx={{ padding: '20px' }}>
-            <Typography sx={{ 
-              fontSize: '14px', 
-              fontWeight: 600, 
-              color: '#333333', 
-              marginBottom: '16px', 
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}>
-              Contacts
-            </Typography>
-            <List>
-              {RIGHT_PANEL_DATA.contacts?.map((contact, index) => (
-                <ListItem key={index} sx={{ padding: '12px 0', borderBottom: '1px solid #f0f0f0' }}>
-                  <Avatar sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    backgroundColor: '#e3f2fd', 
-                    color: '#1976d2', 
-                    fontSize: '12px', 
-                    fontWeight: 600, 
-                    marginRight: '12px' 
-                  }}>
-                    {contact.avatar}
-                  </Avatar>
-                  <ListItemText
-                    primary={contact.name}
-                    secondary={contact.status}
-                    primaryTypographyProps={{ 
-                      sx: { fontSize: '13px', color: '#333333', lineHeight: 1.4 }
-                    }}
-                    secondaryTypographyProps={{ 
-                      sx: { fontSize: '11px', color: '#666666', marginTop: '4px' }
-                    }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Box>
         </Drawer>
       )}
 
@@ -284,19 +334,18 @@ const AppShell = ({ children }) => {
         sx={{
           flexGrow: 1,
           // padding: { xs: '16px', sm: '24px', md: '32px' },
-          marginTop: '64px',
-          marginRight: { xs: 0, md: rightPanelOpen ? '320px' : 0 },
-          minHeight: 'calc(100vh - 64px)',
-          backgroundColor: '#ffffff',
-          transition: 'all 0.3s ease-in-out',
-          position: 'relative',
+          marginTop: "64px",
+          marginRight: { xs: 0, md: rightPanelOpen ? "320px" : 0 },
+          minHeight: "calc(100vh - 64px)",
+          backgroundColor: "#ffffff",
+          transition: "all 0.3s ease-in-out",
+          position: "relative",
           zIndex: 1,
         }}
       >
         <Toolbar />
         {children}
       </Box>
-
     </Box>
   );
 };

@@ -1,3 +1,5 @@
+import { CONTACTS } from "./rightPanelData.js";
+
 // Dashboard constants and mock data
 export const KEY_METRICS = [
   {
@@ -109,15 +111,6 @@ export const TOTAL_SALES_DATA = [
   { name: "E-mail", value: 48.96, percentage: 6.3 },
 ];
 
-export const CONTACTS = [
-  { name: "Natali Craig", avatar: "NC" },
-  { name: "Drew Cano", avatar: "DC" },
-  { name: "Orlando Diggs", avatar: "OD" },
-  { name: "Andi Lane", avatar: "AL" },
-  { name: "Kate Morrison", avatar: "KM" },
-  { name: "Koray Okumus", avatar: "KO" },
-];
-
 export const SIDEBAR_ITEMS = [
   { id: "dashboard", label: "Dashboard", icon: "📊" },
   { id: "analytics", label: "Analytics", icon: "📈" },
@@ -155,58 +148,7 @@ export const DUMMY_STATUSES = [
 
 // Generate 100 orders with realistic data
 const generateOrders = () => {
-  const customers = [
-    "Natali Craig",
-    "Kate Morrison",
-    "Drew Cano",
-    "Orlando Diggs",
-    "Andi Lane",
-    "Koray Okumus",
-    "Sarah Johnson",
-    "Michael Chen",
-    "Emily Rodriguez",
-    "David Kim",
-    "Lisa Thompson",
-    "James Wilson",
-    "Maria Garcia",
-    "Robert Brown",
-    "Jennifer Davis",
-    "Christopher Lee",
-    "Amanda White",
-    "Daniel Martinez",
-    "Jessica Taylor",
-    "Matthew Anderson",
-    "Ashley Thomas",
-    "Joshua Jackson",
-    "Stephanie Harris",
-    "Andrew Clark",
-    "Nicole Lewis",
-    "Kevin Walker",
-    "Samantha Hall",
-    "Ryan Allen",
-    "Brittany Young",
-    "Tyler King",
-    "Megan Wright",
-    "Brandon Lopez",
-    "Rachel Hill",
-    "Justin Scott",
-    "Lauren Green",
-    "Zachary Adams",
-    "Kayla Baker",
-    "Nathan Gonzalez",
-    "Hannah Nelson",
-    "Caleb Carter",
-    "Olivia Mitchell",
-    "Ethan Perez",
-    "Grace Roberts",
-    "Noah Turner",
-    "Chloe Phillips",
-    "Liam Campbell",
-    "Ava Parker",
-    "Lucas Evans",
-    "Sophia Edwards",
-    "Mason Collins",
-  ];
+  const customers = CONTACTS;
 
   const projects = DUMMY_PROJECTS;
 
