@@ -13,6 +13,7 @@ import {
   ListItemText,
   Avatar,
   Divider,
+  TextField,
   Tooltip,
 } from "@mui/material";
 import {
@@ -91,23 +92,29 @@ const AppShell = ({ children }) => {
             }`}
             onClick={handleDrawerToggle}
             sx={{
-              display: { xs: 'block', md: 'none' }
+              display: { xs: "block", md: "none" },
             }}
           />
-          <div 
-            style={{ 
-              color: '#212121', 
-              fontSize: '18px', 
+          <div
+            style={{
+              color: "#212121",
+              fontSize: "18px",
               fontWeight: 600,
               flexGrow: 1,
-              display: 'block',
-              lineHeight: '64px'
+              display: "block",
+              lineHeight: "64px",
             }}
-          />
+          >
+            <Typography>Dashboard</Typography>
+          </div>
+
           <Box className={styles.headerActions}>
-            <Tooltip title="Toggle Dark/Light Mode">
-              <ThemeToggle />
-            </Tooltip>
+            <TextField
+              label="Search"
+              size="small"
+              sx={{ width: 300, borderRadius: '24px' }}
+            />
+            <ThemeToggle />
             <Tooltip title="Refresh">
               <HistoryIcon />
             </Tooltip>
@@ -343,7 +350,6 @@ const AppShell = ({ children }) => {
           zIndex: 1,
         }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>

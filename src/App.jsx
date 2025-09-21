@@ -39,7 +39,7 @@ const AppContent = () => {
   
   return (
     <ThemeProvider theme={createMuiTheme(isDarkMode)}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <BrowserRouter>
         <AppShell>
           <AppRoutes />

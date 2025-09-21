@@ -127,8 +127,8 @@ const Dashboard = () => {
             xs={12} 
             sm={12} 
             md={12} 
-            lg={6} 
-            xl={6}
+            lg={8} 
+            xl={8}
             sx={{ 
               display: 'flex',
               flexDirection: 'column',
@@ -161,8 +161,8 @@ const Dashboard = () => {
             xs={12} 
             sm={12} 
             md={12} 
-            lg={6} 
-            xl={6}
+            lg={4} 
+            xl={4}
             sx={{ 
               display: 'flex',
               flexDirection: 'column',
