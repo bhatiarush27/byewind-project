@@ -2,9 +2,12 @@ import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useTheme } from '../contexts/ThemeContext';
 import { TOTAL_SALES_DATA } from '../constants/dashboardData';
 
 const TotalSalesChart = () => {
+  const { theme } = useTheme();
+  
   const options = {
     chart: {
       type: 'pie',
@@ -13,13 +16,13 @@ const TotalSalesChart = () => {
     title: {
       text: 'Total Sales',
       style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
+        color: theme.palette.text.primary
       }
     },
     plotOptions: {
       pie: {
-        innerSize: '60%',
+        innerSize: '70%',
+        borderRadius: '16px',
         dataLabels: {
           enabled: false
         },
@@ -29,17 +32,21 @@ const TotalSalesChart = () => {
     series: [{
       name: 'Sales',
       data: TOTAL_SALES_DATA.map(item => ({
-        name: item.name,
+        name: `${item.name} (${item.value})`,
         y: item.value,
-        color: item.name === 'Direct' ? '#4A90E2' : 
-               item.name === 'Affiliate' ? '#10B981' :
-               item.name === 'Sponsored' ? '#F59E0B' : '#EF4444'
+        color: item.name === 'Direct' ? theme.palette.primary.main : 
+               item.name === 'Affiliate' ? theme.palette.secondary.main :
+               item.name === 'Sponsored' ? theme.palette.status.warning : theme.palette.status.error
       }))
     }],
     legend: {
       enabled: true,
-      align: 'right',
-      verticalAlign: 'middle',
+      align: 'bottom',
+      horizontalAlign: 'center',
+      verticalAlign: 'bottom',
+      itemStyle: {
+        color: theme.palette.text.primary
+      },
       layout: 'vertical'
     },
     credits: {

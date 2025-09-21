@@ -6,22 +6,150 @@ import { ThemeProvider as CustomThemeProvider, useTheme } from './contexts/Theme
 import AppShell from './components/AppShell/AppShell';
 import AppRoutes from './routes/AppRoutes';
 
-const createMuiTheme = (isDarkMode) => createTheme({
+const createMuiTheme = (customTheme) => createTheme({
   palette: {
-    mode: isDarkMode ? 'dark' : 'light',
-    primary: {
-      main: isDarkMode ? '#64b5f6' : '#2196f3',
+    mode: customTheme.mode,
+    primary: customTheme.palette.primary,
+    secondary: customTheme.palette.secondary,
+    background: customTheme.palette.background,
+    text: customTheme.palette.text,
+    divider: customTheme.palette.divider,
+    action: customTheme.palette.action,
+    success: {
+      main: customTheme.palette.status.success,
     },
-    secondary: {
-      main: isDarkMode ? '#81c784' : '#4caf50',
+    warning: {
+      main: customTheme.palette.status.warning,
     },
-    background: {
-      default: isDarkMode ? '#0a0a0a' : '#ffffff',
-      paper: isDarkMode ? '#1e1e1e' : '#ffffff',
+    error: {
+      main: customTheme.palette.status.error,
+    },
+    info: {
+      main: customTheme.palette.status.info,
     },
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      color: customTheme.palette.text.primary,
+    },
+    h2: {
+      color: customTheme.palette.text.primary,
+    },
+    h3: {
+      color: customTheme.palette.text.primary,
+    },
+    h4: {
+      color: customTheme.palette.text.primary,
+    },
+    h5: {
+      color: customTheme.palette.text.primary,
+    },
+    h6: {
+      color: customTheme.palette.text.primary,
+    },
+    body1: {
+      color: customTheme.palette.text.primary,
+    },
+    body2: {
+      color: customTheme.palette.text.secondary,
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: customTheme.palette.background.default,
+          color: customTheme.palette.text.primary,
+          transition: 'background-color 0.3s ease, color 0.3s ease',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: customTheme.palette.background.paper,
+          color: customTheme.palette.text.primary,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: customTheme.palette.background.paper,
+          color: customTheme.palette.text.primary,
+          border: `1px solid ${customTheme.palette.border.main}`,
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: customTheme.palette.background.paper,
+          color: customTheme.palette.text.primary,
+          borderBottom: `1px solid ${customTheme.palette.divider}`,
+          boxShadow: customTheme.shadows.md,
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: customTheme.palette.background.paper,
+          color: customTheme.palette.text.primary,
+          borderRight: `1px solid ${customTheme.palette.divider}`,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            backgroundColor: customTheme.palette.background.paper,
+            color: customTheme.palette.text.primary,
+            '& fieldset': {
+              borderColor: customTheme.palette.border.main,
+            },
+            '&:hover fieldset': {
+              borderColor: customTheme.palette.primary.main,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: customTheme.palette.primary.main,
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: customTheme.palette.text.secondary,
+            '&.Mui-focused': {
+              color: customTheme.palette.primary.main,
+            },
+          },
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: customTheme.palette.action.hover,
+          },
+          '&.Mui-selected': {
+            backgroundColor: customTheme.palette.action.selected,
+            '&:hover': {
+              backgroundColor: customTheme.palette.action.selected,
+            },
+          },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: customTheme.palette.background.secondary,
+          color: customTheme.palette.text.primary,
+          border: `1px solid ${customTheme.palette.border.main}`,
+        },
+      },
+    },
   },
   breakpoints: {
     values: {
@@ -35,16 +163,15 @@ const createMuiTheme = (isDarkMode) => createTheme({
 });
 
 const AppContent = () => {
-  const { isDarkMode } = useTheme();
+  const { theme } = useTheme();
   
   return (
-    <ThemeProvider theme={createMuiTheme(isDarkMode)}>
-      {/* <CssBaseline /> */}
+    <ThemeProvider theme={createMuiTheme(theme)}>
+      <CssBaseline />
       <BrowserRouter>
         <AppShell>
           <AppRoutes />
         </AppShell>
-        
       </BrowserRouter>
     </ThemeProvider>
   );

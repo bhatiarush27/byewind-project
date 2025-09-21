@@ -25,7 +25,9 @@ import {
 import { DEFAULT_USER } from "../../constants/rightPanelData.js";
 import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useTheme } from "../../contexts/ThemeContext";
 import styles from "./SidePanel.module.css";
+import QuickAccessSection from "../NavigationItem/QuickAccessSection";
 
 const SidePanel = ({
   isOpen,
@@ -35,6 +37,7 @@ const SidePanel = ({
   navigationData = null,
   rightPanelData = null,
 }) => {
+  const { theme } = useTheme();
   const [expandedItems, setExpandedItems] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,10 +80,6 @@ const SidePanel = ({
             }`}
             sx={{
               pl: 2 + level * 2,
-              backgroundColor: isSelected ? "#f5f5f5" : "transparent",
-              "&:hover": {
-                backgroundColor: isSelected ? "#f5f5f5" : "#fafafa",
-              },
             }}
           >
             <ListItemIcon className={styles.listItemIcon}>
@@ -120,119 +119,20 @@ const SidePanel = ({
     );
   };
 
-  const renderRightPanelContent = () => {
-    if (!rightPanelData) return null;
-
-    return (
-      <Box className={styles.rightPanelContent}>
-        {/* Header - Just the title */}
-        <Box className={styles.rightPanelHeader}>
-          <Typography className={styles.rightPanelTitle}>
-            Notifications
-          </Typography>
-        </Box>
-
-        {/* Notifications Section */}
-        <Box className={styles.rightPanelSection}>
-          <Typography className={styles.rightPanelSectionTitle}>
-            Notifications
-          </Typography>
-          <List>
-            {rightPanelData.notifications?.map((notification, index) => (
-              <ListItem key={index} className={styles.rightPanelListItem}>
-                <ListItemText
-                  primary={notification.message}
-                  secondary={notification.time}
-                  primaryTypographyProps={{
-                    className: styles.rightPanelPrimaryText,
-                  }}
-                  secondaryTypographyProps={{
-                    className: styles.rightPanelSecondaryText,
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-
-        <Divider className={styles.rightPanelDivider} />
-
-        {/* Activities Section */}
-        <Box className={styles.rightPanelSection}>
-          <Typography className={styles.rightPanelSectionTitle}>
-            Activities
-          </Typography>
-          <List>
-            {rightPanelData.activities?.map((activity, index) => (
-              <ListItem key={index} className={styles.rightPanelListItem}>
-                <Avatar className={styles.rightPanelAvatar}>A</Avatar>
-                <ListItemText
-                  primary={activity.message}
-                  secondary={activity.time}
-                  primaryTypographyProps={{
-                    className: styles.rightPanelPrimaryText,
-                  }}
-                  secondaryTypographyProps={{
-                    className: styles.rightPanelSecondaryText,
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-
-        <Divider className={styles.rightPanelDivider} />
-
-        {/* Contacts Section */}
-        <Box className={styles.rightPanelSection}>
-          <Typography className={styles.rightPanelSectionTitle}>
-            Contacts
-          </Typography>
-          <List>
-            {rightPanelData.contacts?.map((contact, index) => (
-              <ListItem key={index} className={styles.rightPanelListItem}>
-                <Avatar className={styles.rightPanelAvatar}>
-                  {contact.avatar}
-                </Avatar>
-                <ListItemText
-                  primary={contact.name}
-                  secondary={contact.status}
-                  primaryTypographyProps={{
-                    className: styles.rightPanelPrimaryText,
-                  }}
-                  secondaryTypographyProps={{
-                    className: styles.rightPanelSecondaryText,
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Box>
-    );
-  };
-
   const drawerContent = () => {
-    if (panelType === "right" && rightPanelData) {
-      return renderRightPanelContent();
-    }
-
     if (panelType === "navigation" && navigationData) {
       return (
         <Box className={styles.drawerContent}>
           <Box className={styles.brandSection}>
-            <Avatar
-              sx={{
-                width: 32,
-                height: 32,
-                fontSize: "0.875rem",
-                bgcolor: "primary.main",
-                color: "white",
-              }}
-              src={DEFAULT_USER.avatar}
-            />
-            <Typography className={styles.brandName}>ByeWind</Typography>
+            <Box className={styles.brandText}>
+              <Avatar src={DEFAULT_USER.avatar} alt="ByeWind" />
+            </Box>
+            <Typography className={styles.brandName}>
+              ByeWind
+            </Typography>
           </Box>
+
+          <QuickAccessSection />
 
           {/* Navigation Content */}
           <Box className={styles.navigationContent}>
@@ -279,9 +179,9 @@ const SidePanel = ({
         "& .MuiDrawer-paper": {
           width: position === "right" ? 320 : 280,
           boxSizing: "border-box",
-          backgroundColor: "#ffffff",
-          borderRight: position === "left" ? "1px solid #e0e0e0" : "none",
-          borderLeft: position === "right" ? "1px solid #e0e0e0" : "none",
+          backgroundColor: theme.palette.background.paper,
+          borderRight: position === "left" ? `1px solid ${theme.palette.divider}` : "none",
+          borderLeft: position === "right" ? `1px solid ${theme.palette.divider}` : "none",
           ...(position === "right" && {
             right: 0,
             left: "auto",

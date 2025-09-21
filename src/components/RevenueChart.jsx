@@ -1,13 +1,18 @@
 import { Card, CardContent } from "@mui/material";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useTheme } from "../contexts/ThemeContext";
 import { REVENUE_TREND_DATA } from "../constants/dashboardData";
 
 const RevenueChart = () => {
+  const { theme } = useTheme();
+  
   const options = {
     chart: {
       type: "spline", // Change line to spline for curved lines
       backgroundColor: "transparent",
+      color: theme.palette.text.primary,
+      height: "350px",
     },
     title: {
       text: "Revenue |",
@@ -15,6 +20,7 @@ const RevenueChart = () => {
       style: {
         fontSize: "16px",
         fontWeight: "bold",
+        color: theme.palette.text.primary,
       },
     },
     legend: {
@@ -22,12 +28,20 @@ const RevenueChart = () => {
       align: "left",
       verticalAlign: "top",
       layout: "horizontal",
+      itemStyle: {
+        color: theme.palette.text.primary,
+      },
       x: 80,
       y: -10,
       floating: true,
     },
     xAxis: {
       categories: REVENUE_TREND_DATA.map((item) => item.month),
+      labels: {
+        style: {
+          color: theme.palette.text.primary,
+        },
+      },
     },
     yAxis: {
       min: 0,
@@ -35,6 +49,9 @@ const RevenueChart = () => {
       tickInterval: 10,
       labels: {
         format: "{value}M",
+        style: {
+          color: theme.palette.text.primary,
+        },
       },
       title: {
         text: "",
@@ -44,13 +61,13 @@ const RevenueChart = () => {
       {
         name: "Current Week",
         data: REVENUE_TREND_DATA.map((item) => item.current),
-        color: "#4A90E2",
+        color: theme.palette.primary.main,
         lineWidth: 3,
       },
       {
         name: "Previous Week",
         data: REVENUE_TREND_DATA.map((item) => item.previous),
-        color: "#94A3B8",
+        color: theme.palette.text.secondary,
         lineWidth: 2,
         zoneAxis: "x",
         zones: [

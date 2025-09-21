@@ -1,13 +1,16 @@
 
 
 .information {
-  background-color: var(--color-background-information-light);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-contrast);
 }
 
 .neutral {
-  background-color: var(--color-background-neutral-light);
+  background-color: #F0F0F0;
+  color: var(--color-primary-contrast);
 }
 
 .tertiary {
-  background-color: var(--color-background-tertiary-light);
+  background-color: lightgray;
+  color: var(--color-text-primary);
 }

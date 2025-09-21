@@ -1,27 +1,43 @@
 import { Card, CardContent, Box } from "@mui/material";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useTheme } from "../contexts/ThemeContext";
 
 const ProjectionsChart = () => {
+  const { theme } = useTheme();
+  
   const options = {
     chart: {
       type: "column",
       backgroundColor: "transparent",
-      // height: "100%",
+      height: "350px",
       // maxHeight: "100%",
       // spacing: [20, 20, 20, 20],
     },
     title: {
       text: "Projections vs Actuals",
+      style: {
+        color: theme.palette.text.primary,
+      },
     },
     xAxis: {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      labels: {
+        style: {
+          color: theme.palette.text.primary,
+        },
+      },
     },
     yAxis: [
       {
         min: 0,
         title: {
           text: "",
+        },
+        labels: {
+          style: {
+            color: theme.palette.text.primary,
+          },
         },
         tickInterval: 10,
         max: 30,
@@ -52,7 +68,7 @@ const ProjectionsChart = () => {
     series: [
       {
         name: "Actual",
-        color: "#D6E6F2",
+        color: theme.palette.primary.light,
         data: [22, 25, 20, 26, 26, 30],
         pointPadding: 0.2,
         pointPlacement: 0.2,
@@ -60,7 +76,7 @@ const ProjectionsChart = () => {
       },
       {
         name: "Projection",
-        color: "#A8C5DA",
+        color: theme.palette.primary.main,
         data: [18, 20, 18, 24, 20, 28],
         pointPadding: 0.2,
         pointPlacement: 0.2,

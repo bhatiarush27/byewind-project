@@ -32,7 +32,7 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
           sx={{
             fontWeight: "600",
             fontSize: { xs: "12px", sm: "13px", md: "14px" },
-            color: "var(--color-text-primary)",
+            color: "#000000",
             lineHeight: 1.2,
           }}
         >
@@ -49,7 +49,7 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
             sx={{
               fontWeight: "700",
               fontSize: { xs: "18px", sm: "20px", md: "24px" },
-              color: "var(--color-text-primary)",
+              color: "#000000",
               lineHeight: { xs: "24px", sm: "28px", md: "36px" },
               flex: "1 1 auto",
               minWidth: 0,
@@ -62,7 +62,7 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
               sx={{
                 fontWeight: "600",
                 fontSize: { xs: "10px", sm: "11px", md: "12px" },
-                color: "var(--color-text-primary)",
+                color: "#000000",
               }}
             >
               {change}
@@ -70,14 +70,14 @@ const KPIBox = ({ title, value, change, growthStatus, semantic }) => {
             {growthStatus === "positive" ? (
               <TrendingUp
                 sx={{ 
-                  color: "var(--color-text-primary)", 
+                  color: "#000000", 
                   fontSize: { xs: 14, sm: 15, md: 16 } 
                 }}
               />
             ) : (
               <TrendingDown
                 sx={{ 
-                  color: "var(--color-text-primary)", 
+                  color: "#000000", 
                   fontSize: { xs: 14, sm: 15, md: 16 } 
                 }}
               />

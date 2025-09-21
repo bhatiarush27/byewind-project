@@ -71,13 +71,6 @@ const ComingSoon = ({ pageName = "This Page" }) => {
           We're working hard to bring you this amazing feature! 
           Our development team is putting the finishing touches on this page.
         </Typography>
-        
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
-          <Code />
-          <Typography variant="body2" sx={{ opacity: 0.7 }}>
-            Powered by React & Material-UI
-          </Typography>
-        </Box>
       </Paper>
     </Container>
   );

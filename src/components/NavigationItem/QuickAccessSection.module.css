@@ -1,6 +1,6 @@
 .quickAccessSection {
   padding: var(--spacing-md) var(--spacing-lg);
-  background-color: var(--color-background-paper);
+  background-color: var(--color-background-hover);
 }
 
 .sectionTitle {
